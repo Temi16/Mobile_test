@@ -1,23 +1,18 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { View, Text, TextInput, Button, Alert, TouchableOpacity, StyleSheet } from "react-native";
-import { useNavigation, useRoute } from "@react-navigation/native";
-import { FontAwesome,Ionicons } from '@expo/vector-icons';
+import { useNavigation } from "@react-navigation/native";
 
 
-const DashboardScreen = ({navigation}) => {
-    // const navigation = useNavigation();
-    // const nav = useRoute().params
-    console.log(navigation)
+const HomeScreen = () => {
+    const navigation = useNavigation();
 
     return(
         <View style={styles.container}>
             <View style={styles.titleView}>
                 <Text style={styles.titleText}>Dashboard</Text>
-                <FontAwesome name="bars" size={22} color={"black"} style={{marginLeft:'auto',marginTop:-24}} onPress={() => navigation.openDrawer()} />
             </View>
-            <Text style={styles.textBig}>Welcome to Dashboard</Text>
             <View style={styles.secondContainer}>
-                
+                <Text style={styles.textBig}>dashboard</Text>
                 <TouchableOpacity
                     style={styles.continueBtn}
                     onPress={() =>{
@@ -30,10 +25,6 @@ const DashboardScreen = ({navigation}) => {
                         handleLogin()}}>
                     <Text style={styles.btnText} >Notes</Text>
                 </TouchableOpacity>
-               
-            </View>
-            <View style={styles.secondContainer2}>
-
                 <TouchableOpacity
                     style={styles.continueBtn}
                     onPress={() =>{
@@ -73,16 +64,7 @@ const styles = StyleSheet.create({
     secondContainer:{
         marginTop: -175,
         flex:1,
-        flexDirection: "row",
-        //justifyContent: 'center',
-        alignItems: 'center',
-    },
-    secondContainer2:{
-        marginTop: -375,
-        flex:1,
-        flexDirection: "row",
-       // margin: 20,
-        //justifyContent: 'center',
+        justifyContent: 'center',
         alignItems: 'center',
     },
     title: {
@@ -118,22 +100,21 @@ const styles = StyleSheet.create({
       },
      
       continueBtn:{
-        backgroundColor: "white",
+        backgroundColor: "gold",
         borderRadius: 9,
         padding: 10,
         width: 150,
-        height: 200,
+        height: 150,
         textAlign: 'center',
         justifyContent: 'center',
-        alignItems: 'center',
-        margin: 20
+        alignItems: 'center'
       },
       btnText:{
-        color:'black',
+        color:'#080604',
         fontSize:20,
         fontWeight:'bold'
     },
    
 });
 
-export default DashboardScreen;
+export default HomeScreen;

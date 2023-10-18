@@ -64,20 +64,20 @@ const UpdateProfile = async (data, token) => {
 };
 
 //Change Password
-const changePassword = async (data, authorization) => {
+const ForgotPassword = async (data, authorization) => {
     let result = { error: "No data found" };
   
     const headers = {
       'Content-Type': 'application/json',
       'x-project': 'cmVhY3R0YXNrOjVmY2h4bjVtOGhibzZqY3hpcTN4ZGRvZm9kb2Fjc2t5ZQ==',
-      'Authorization' : `Bearer ${token}`
+      'Authorization' : `Bearer ${authorization}`
     };
 
     await axios
     .post(
       `https://reacttask.mkdlabs.com/v2/api/lambda/forgot`,
       data,
-      authorization
+      headers
     )
       .then((res) => {
         result = { response: res.data };
@@ -89,20 +89,20 @@ const changePassword = async (data, authorization) => {
     return result;
 };
 
-const passwordResetLink = async (data) => {
+const passwordReset = async (data) => {
     let result = { error: "No data found" };
   
     const headers = {
       'Content-Type': 'application/json',
       'x-project': 'cmVhY3R0YXNrOjVmY2h4bjVtOGhibzZqY3hpcTN4ZGRvZm9kb2Fjc2t5ZQ==',
-      'Authorization' : `Bearer ${token}`
+     
     };
 
     await axios
     .post(
       `https://reacttask.mkdlabs.com/v2/api/lambda/reset`,
       data,
-      authorization
+      headers
     )
       .then((res) => {
         result = { response: res.data };
@@ -114,4 +114,4 @@ const passwordResetLink = async (data) => {
     return result;
 };
 
-export {LoginUser, RegisterUser, UpdateProfile, changePassword, passwordResetLink};
+export {LoginUser, RegisterUser, UpdateProfile, ForgotPassword, passwordReset};

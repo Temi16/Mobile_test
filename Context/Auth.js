@@ -23,9 +23,14 @@ export const AuthContext = ({ children }) => {
         return JSON.parse(token);
     };
 
+    const handleLogout = async () => {
+      await AsyncStorage.removeItem("@token");
+    };
+
     const stateValues = {
         setToken,
         getToken,
+        handleLogout
     }
 
     return <Context.Provider value={stateValues}>{children}</Context.Provider>;

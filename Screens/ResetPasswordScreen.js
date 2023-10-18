@@ -2,15 +2,17 @@ import React, { useState, useEffect, useContext, useRef } from "react";
 import { View, Text, TextInput, Button, Alert, TouchableOpacity, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Context } from "../Context/Auth";
-import { LoginUser } from "../Services/User/UserApi";
+import { passwordReset } from "../Services/User/UserApi";
+import { Ionicons } from '@expo/vector-icons'; 
 
-const LoginScreen = () => {
+const ResetPasswordScreen = () => {
     const navigation = useNavigation();
     const {
         setToken,
     } = useContext(Context);
 
-    const [email, setEmail] = useState('');
+    const [code, setCode] = useState('');
+    const [token, setTok] = useState('');
     const [password, setPassword] = useState('');
    
 
@@ -18,23 +20,23 @@ const LoginScreen = () => {
       setValue(value);
     };
     
-      const handleLogin = async() => {
+      const handleResetPassword = async() => {
         const data = {
-            email: email,
+            token: token,
+            code: code,
             password: password,
-            role: "admin"
         }
         console.log("45")
-        const login = await LoginUser(data);
-        console.log(login.response)
-        if(login?.response){
-            await setToken(login.response.token)
-            navigation.navigate('DashboardScreen');
+        const reset = await passwordReset(data);
+        console.log(reset.response)
+        if(reset?.response){
+            await setToken(reset.response.token)
+            navigation.navigate('LoginScreen');
         }else{
             //Alert
             Alert.alert(
-                'Error!',      
-                `Incorrect email or password, please try again`,  
+                'Success',      
+                `Password reset Successfully`,  
                 [
                   {
                     text: 'OK',      
@@ -44,14 +46,22 @@ const LoginScreen = () => {
                 ],
                 { cancelable: false }  
               )
-        }
+              navigation.navigate('LoginScreen');
+         }
     };
 
 
     return(
         <View style={styles.container}>
             <View style={styles.titleView}>
-                <Text style={styles.titleText}>Login Page</Text>
+                <TouchableOpacity style={{ alignSelf: "flex-start" }} onPress={() => navigation.goBack()}>
+                    <Ionicons
+                        name="arrow-back-circle-outline" 
+                        size={24}
+                        color="white"
+                    />
+                </TouchableOpacity>
+                <Text style={styles.titleText}>Reset Password Page</Text>
             </View>
             <View style={styles.secondContainer}>
                 <Text style={styles.textBig}>Welcome</Text>
@@ -59,10 +69,10 @@ const LoginScreen = () => {
                 <TextInput
                     style={styles.input}
                     onChangeText={(text) =>
-                        handleValueChange(text, { setValue: setEmail })
+                        handleValueChange(text, { setValue: setTok })
                       }
-                    value={email}
-                    placeholder="email"
+                    value={token}
+                    placeholder="token"
                     //maxLength={4}
                 />
                 <TextInput
@@ -75,23 +85,22 @@ const LoginScreen = () => {
                     // keyboardType="numeric"
                     // maxLength={4}
                 />
-               
-                <View style={styles.title1}>
-                  <TouchableOpacity style={{ alignSelf: "flex-start" }} onPress={() => navigation.navigate("ForgotPasswordScreen")}>
-                    <Text style={styles.text3 }>Forget Password</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                   onPress={() =>{
-                    navigation.navigate('RegisterScreen')}}
-                  >
-                    <Text style={styles.text2}>Register</Text>
-                  </TouchableOpacity>
-                </View>
+                 <TextInput
+                    style={styles.input}
+                    onChangeText={(text) =>
+                        handleValueChange(text, { setValue: setCode })
+                      }
+                    value={code}
+                    placeholder="code"
+                    // keyboardType="numeric"
+                    // maxLength={4}
+                />
+
                 <TouchableOpacity
                     style={styles.continueBtn}
                     onPress={() =>{
-                        handleLogin()}}>
-                    <Text style={styles.btnText} >Login</Text>
+                        handleResetPassword()}}>
+                    <Text style={styles.btnText} >Reset Password</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -100,12 +109,6 @@ const LoginScreen = () => {
 }
 
 const styles = StyleSheet.create({
-  title1 :{
-    
-    flexDirection : 'row',
-    marginTop: 10,
-    marginBottom: 10
-  },
     titleView :{
         flexDirection : 'row',
         marginTop: 30,
@@ -179,18 +182,10 @@ const styles = StyleSheet.create({
       color:'blue',
       fontSize:17,
       fontWeight:'bold',
-      marginLeft:170,
+      marginLeft: 250,
       textDecorationLine: 'underline'
       
-    },
-    text3:{
-      color:'blue',
-      fontSize:17,
-      fontWeight:'bold',
-      marginLeft:-0,
-      textDecorationLine: 'underline'
-      
-    }
+  }
 });
 
-export default LoginScreen;
+export default ResetPasswordScreen;
