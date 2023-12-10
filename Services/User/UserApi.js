@@ -1,17 +1,16 @@
-import Header from "../Header";
+
 import axios from "axios";
 
 
 const LoginUser = async (data) => {
+  console.log("hii34")
     let result = { error: "No data found" };
-    const headers = {
-      'Content-Type': 'application/json',
-      'x-project': 'cmVhY3R0YXNrOjVmY2h4bjVtOGhibzZqY3hpcTN4ZGRvZm9kb2Fjc2t5ZQ=='
-    };
-  
+    
     await axios
-      .post(`https://reacttask.mkdlabs.com/v2/api/lambda/login`, data, {headers})
+      .post(`https://bankapi.veegil.com/auth/login`, data)
       .then((res) => {
+        console.log("hii35")
+        console.log(res)
         result = { response: res.data };
       })
       .catch((error) => {
@@ -23,13 +22,13 @@ const LoginUser = async (data) => {
 const RegisterUser = async (data) => {
     let result = { error: "No data found" };
 
-    const headers = {
-      'Content-Type': 'application/json',
-      'x-project': 'cmVhY3R0YXNrOmQ5aGVkeWN5djZwN3p3OHhpMzR0OWJtdHNqc2lneTV0Nw=='
-    };
+    // const headers = {
+    //   'Content-Type': 'application/json',
+    //   'x-project': 'cmVhY3R0YXNrOmQ5aGVkeWN5djZwN3p3OHhpMzR0OWJtdHNqc2lneTV0Nw=='
+    // };
     console.log("23");
     await axios
-    .post(`https://reacttask.mkdlabs.com/v2/api/lambda/register`, data, {headers})
+    .post(`https://bankapi.veegil.com/auth/signup`, data)
       .then((res) => {
         console.log(res);
         result = { response: res.data };
@@ -41,77 +40,5 @@ const RegisterUser = async (data) => {
     return result;
 };
 
-const UpdateProfile = async (data, token) => {
-  let result = { error: "No data found" };
 
-  const headers = {
-    'Content-Type': 'application/json',
-    'x-project': 'cmVhY3R0YXNrOjVmY2h4bjVtOGhibzZqY3hpcTN4ZGRvZm9kb2Fjc2t5ZQ==',
-    'Authorization' : `Bearer ${token}`
-  };
-  console.log("23");
-  await axios
-  .post(`https://reacttask.mkdlabs.com/v2/api/lambda/profile`, data, {headers})
-    .then((res) => {
-      console.log(res);
-      result = { response: res };
-    })
-    .catch((error) => {
-      result = { error: error };
-    });
-
-  return result;
-};
-
-//Change Password
-const ForgotPassword = async (data, authorization) => {
-    let result = { error: "No data found" };
-  
-    const headers = {
-      'Content-Type': 'application/json',
-      'x-project': 'cmVhY3R0YXNrOjVmY2h4bjVtOGhibzZqY3hpcTN4ZGRvZm9kb2Fjc2t5ZQ==',
-      'Authorization' : `Bearer ${authorization}`
-    };
-
-    await axios
-    .post(
-      `https://reacttask.mkdlabs.com/v2/api/lambda/forgot`,
-      data,
-      headers
-    )
-      .then((res) => {
-        result = { response: res.data };
-      })
-      .catch((error) => {
-        result = { error: error };
-      });
-  
-    return result;
-};
-
-const passwordReset = async (data) => {
-    let result = { error: "No data found" };
-  
-    const headers = {
-      'Content-Type': 'application/json',
-      'x-project': 'cmVhY3R0YXNrOjVmY2h4bjVtOGhibzZqY3hpcTN4ZGRvZm9kb2Fjc2t5ZQ==',
-     
-    };
-
-    await axios
-    .post(
-      `https://reacttask.mkdlabs.com/v2/api/lambda/reset`,
-      data,
-      headers
-    )
-      .then((res) => {
-        result = { response: res.data };
-      })
-      .catch((error) => {
-        result = { error: error };
-      });
-  
-    return result;
-};
-
-export {LoginUser, RegisterUser, UpdateProfile, ForgotPassword, passwordReset};
+export {LoginUser, RegisterUser};

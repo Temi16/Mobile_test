@@ -16,6 +16,10 @@ import DashboardScreen from '../Screens/DashboardScreen';
 import ForgotPasswordScreen from '../Screens/ForgotPasswordScreen';
 import ResetPasswordScreen from '../Screens/ResetPasswordScreen';
 import SideBar from '../Screens/Sidebar';
+import TransferScreen from '../Screens/TransferScreen';
+import WithdrawalScreen from '../Screens/WithdrawalScreen';
+import AllTransactionsScreen from '../Screens/AllTransactionsScreen';
+
 const EcommerceStack = () => {
     const Drawer = createDrawerNavigator();
     return (
@@ -30,6 +34,10 @@ const EcommerceStack = () => {
       <Drawer.Screen name="DashboardScreen" component={DashboardScreen} />
       <Drawer.Screen name="ForgotPasswordScreen" component={ForgotPasswordScreen} />
       <Drawer.Screen name="ResetPasswordScreen" component={ResetPasswordScreen} />
+      <Drawer.Screen name="DepositScreen" component={TransferScreen} />
+      <Drawer.Screen name="WithdrawalScreen" component={WithdrawalScreen} />
+      <Drawer.Screen name="AllTransactionsScreen" component={AllTransactionsScreen} />
+     
     </Drawer.Navigator>
     )
 }

@@ -2,47 +2,53 @@ import React, { useState, useEffect, useContext, useRef } from "react";
 import { View, Text, TextInput, Button, Alert, TouchableOpacity, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Context } from "../Context/Auth";
-import { RegisterUser } from "../Services/User/UserApi";
-import { UpdateProfile } from "../Services/User/UserApi";
-import { Ionicons } from '@expo/vector-icons'; 
+import { Ionicons } from '@expo/vector-icons';
+import { LoginUser } from "../Services/User/UserApi";
 
-const RegisterScreen = () => {
+const AllTransactionsScreen = () => {
     const navigation = useNavigation();
     const {
         setToken,
-        getToken
     } = useContext(Context);
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [firstname, setFirstname] = useState('');
-    const [lastname, setLastname] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [amount, setAmount] = useState('');
    
 
     const handleValueChange = (value, { setValue }) => {
       setValue(value);
     };
-      
-      const handleRegister = async() => {
-        navigation.navigate('LoginScreen');
+    
+      const handleDeposit = async() => {
+        Alert.alert(
+                  'success!',      
+                  `Transaction successful`,  
+                  [
+                    {
+                      text: 'OK',      
+                      onPress: () => console.log('OK Pressed')  
+                    },
+                    // You can add more buttons here
+                  ],
+                  { cancelable: false }  
+                )
+        navigation.navigate('DashboardScreen')
         // const data = {
         //     email: email,
         //     password: password,
-            
+        //     role: "admin"
         // }
-        // console.log("46")
-        // const register = await RegisterUser(data);
-        // console.log(register.response)
-        // //const token = await setToken(register.response.token)
-        
-        
-        // if(register?.response){
-        //     navigation.navigate('LoginScreen');
+        // console.log("45")
+        // const login = await LoginUser(data);
+        // console.log(login.response)
+        // if(login?.response){
+        //     await setToken(login.response.token)
+        //     navigation.navigate('DashboardScreen');
         // }else{
         //     //Alert
         //     Alert.alert(
         //         'Error!',      
-        //         `Cannot Register, please check correctly your inputs`,  
+        //         `Incorrect email or password, please try again`,  
         //         [
         //           {
         //             text: 'OK',      
@@ -53,65 +59,70 @@ const RegisterScreen = () => {
         //         { cancelable: false }  
         //       )
         // }
-    
-      
     };
 
 
     return(
         <View style={styles.container}>
             <View style={styles.titleView}>
-                <TouchableOpacity style={{ alignSelf: "flex-start" }} onPress={() => navigation.goBack()}>
-                    <Ionicons
-                        name="arrow-back-circle-outline" 
-                        size={24}
-                        color="white"
-                    />
-                </TouchableOpacity>
-                <Text style={styles.titleText}>Registration Page</Text>
+                <Ionicons name="arrow-back" size={34} color={"white"} style={{marginLeft: 10}} onPress={()=>navigation.navigate("DashboardScreen")} />
+                <Text style={styles.titleText}>History</Text>
             </View>
             <View style={styles.secondContainer}>
+            <View style={{flexDirection:'row'}}>
+                <View style={{paddingLeft:10}}>
+                <Text style={styles.textSmall}>PhoneNumber: xx1233</Text>
+                <Text style={styles.textSmall}>Amount: 5000 </Text>
                
-                <TextInput
-                    style={styles.input}
-                    onChangeText={(text) =>
-                        handleValueChange(text, { setValue: setEmail })
-                      }
-                    value={email}
-                    placeholder="phone number"
-                    
-                />
-                <TextInput
-                    style={styles.input}
-                    onChangeText={(text) =>
-                        handleValueChange(text, { setValue: setPassword })
-                      }
-                    value={password}
-                    placeholder="password"
-                    // keyboardType="numeric"
-                    // maxLength={4}
-                />
-                <TouchableOpacity
-                    style={styles.continueBtn}
-                    onPress={() =>{
-                        handleRegister()}}>
-                    <Text style={styles.btnText} >Register</Text>
-                </TouchableOpacity>
+                </View>
+               
             </View>
+            </View>
+            {/* <View style={styles.secondContainer}>
+                <Text style={styles.modalText}>Please, Enter the phone number and amount to withdraw to continue.</Text>
+                <TextInput
+                    style={styles.input}
+                    onChangeText={(text) =>
+                        handleValueChange(text, { setValue: setPhoneNumber })
+                      }
+                    value={phoneNumber}
+                    placeholder="phone number"
+                    //maxLength={4}
+                />
+               
+                
+            </View> */}
         </View>
     )
    
 }
 
 const styles = StyleSheet.create({
+    textSmall:{
+        color:"black",
+        fontSize:22,
+    },
+    textBig:{
+        color:"black",
+        fontSize:14,
+        fontWeight:'bold'
+    },
+  title1 :{
+    
+    flexDirection : 'row',
+    marginTop: 10,
+    marginBottom: 10
+  },
     titleView :{
         flexDirection : 'row',
+        alignContent: "space-between",
+        alignItems: "center",
         marginTop: 30,
     },
       titleText:{
         color: 'white',
-        paddingLeft: 60,
-        fontSize: 24,
+        paddingLeft: (30),
+        fontSize: 34,
         textAlign:'center'
     },
     container:{
@@ -122,10 +133,12 @@ const styles = StyleSheet.create({
         
     },
     secondContainer:{
-        marginTop: -175,
-        flex:1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        backgroundColor:'white',
+        height:80,
+        borderRadius:16,
+        padding:10,
+        marginBottom:20,
+        marginTop:20,
     },
     title: {
       fontSize: 24,
@@ -177,10 +190,23 @@ const styles = StyleSheet.create({
       color:'blue',
       fontSize:17,
       fontWeight:'bold',
-      marginLeft: 250,
+      marginLeft:240,
       textDecorationLine: 'underline'
       
-  }
+    },
+    text3:{
+      color:'blue',
+      fontSize:17,
+      fontWeight:'bold',
+      marginLeft:-0,
+      textDecorationLine: 'underline'
+      
+    },
+    modalText:{
+        fontSize: 20,
+        justifyContent: 'center',
+        textAlign: 'center'
+    }
 });
 
-export default RegisterScreen;
+export default AllTransactionsScreen;

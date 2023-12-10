@@ -16,26 +16,32 @@ const SideBar = (props) => {
     <View style={styles.container}>
       <DrawerContentScrollView {...props} contentContainerStyle={{background:'yellow'}}>
         <View style={styles.drawerContent}>
-          <View style={{height:150}} />
+          <View style={{height:0}} />
          
-          <View style={{borderWidth:1,borderColor:'#2D3648',marginVertical:24,marginHorizontal:20}} />
+          <View style={{borderWidth:10,borderColor:'black',marginVertical:20,marginHorizontal:10}} />
           <DrawerItem 
-            label='Switch to light mode'
-            icon={()=><Ionicons name="ios-sunny" size={22} color="white" style={{}} />} 
-            labelStyle={{color:'white',fontSize:16}}
+            label='Deposit'
+            icon={()=><Ionicons name="link" size={22} color="blue" style={{}} />} 
+            labelStyle={{color:'white',fontSize:20}}
             style={{marginTop:0}}
+            onPress={() =>
+              navigation.navigate('DepositScreen')}
           />
           <DrawerItem 
-            label='settings'
-            icon={()=><Ionicons name="settings-sharp" size={22} color="white" style={{}} />} 
-            labelStyle={{color:'white',fontSize:16}}
+            label='Transfer'
+            icon={()=><Ionicons name="timer" size={22} color="blue" style={{}} />} 
+            labelStyle={{color:'white',fontSize:20}}
             style={{marginTop:0}}
+            onPress={() =>
+              navigation.navigate('WithdrawalScreen')}
           />
           <DrawerItem 
-            label='help'
-            icon={()=><Ionicons name="help-circle" size={22} color="white" style={{}} />} 
-            labelStyle={{color:'white',fontSize:16}}
+            label='History'
+            icon={()=><Ionicons name="filter" size={22} color="blue" style={{}} />} 
+            labelStyle={{color:'white',fontSize:20}}
             style={{marginTop:0}}
+            onPress={() =>
+              navigation.navigate('AllTransactionsScreen')}
           />
         </View>
       </DrawerContentScrollView>
@@ -50,7 +56,7 @@ const SideBar = (props) => {
 const styles = StyleSheet.create({
   container:{
     flex:1,
-    backgroundColor:'#000000',
+    backgroundColor:'grey',
     marginTop: 25
   },
   drawerContent:{

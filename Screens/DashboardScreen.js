@@ -20,15 +20,15 @@ const DashboardScreen = ({navigation}) => {
                 
                 <TouchableOpacity
                     style={styles.continueBtn}
-                    onPress={() =>{
-                        handleLogin()}}>
-                    <Text style={styles.btnText} >Link</Text>
+                    onPress={() =>
+                        navigation.navigate('DepositScreen')}>
+                    <Text style={styles.btnText} >Deposit</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.continueBtn}
-                    onPress={() =>{
-                        handleLogin()}}>
-                    <Text style={styles.btnText} >Notes</Text>
+                    onPress={() =>
+                        navigation.navigate('WithdrawalScreen')}>
+                    <Text style={styles.btnText} >Transfer</Text>
                 </TouchableOpacity>
                
             </View>
@@ -36,15 +36,15 @@ const DashboardScreen = ({navigation}) => {
 
                 <TouchableOpacity
                     style={styles.continueBtn}
-                    onPress={() =>{
-                        handleLogin()}}>
-                    <Text style={styles.btnText} >Proile</Text>
+                    onPress={() =>
+                        navigation.navigate('AllTransactionsScreen')}>
+                    <Text style={styles.btnText}>Deposit and Withdrawal History</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.continueBtn}
-                    onPress={() =>{
-                        handleLogin()}}>
-                    <Text style={styles.btnText} >Images</Text>
+                    onPress={() =>
+                        navigation.navigate('AllTransactionsScreen')}>
+                    <Text style={styles.btnText} >All Transactions</Text>
                 </TouchableOpacity>
             </View>
         </View>

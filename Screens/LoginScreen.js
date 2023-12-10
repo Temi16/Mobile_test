@@ -19,32 +19,32 @@ const LoginScreen = () => {
     };
     
       const handleLogin = async() => {
-        const data = {
-            email: email,
-            password: password,
-            role: "admin"
-        }
-        console.log("45")
-        const login = await LoginUser(data);
-        console.log(login.response)
-        if(login?.response){
-            await setToken(login.response.token)
-            navigation.navigate('DashboardScreen');
-        }else{
-            //Alert
-            Alert.alert(
-                'Error!',      
-                `Incorrect email or password, please try again`,  
-                [
-                  {
-                    text: 'OK',      
-                    onPress: () => console.log('OK Pressed')  
-                  },
-                  // You can add more buttons here
-                ],
-                { cancelable: false }  
-              )
-        }
+        navigation.navigate('DashboardScreen');
+        // const data = {
+        //     email: email,
+        //     password: password,
+        // }
+        // console.log("47")
+        // const login = await LoginUser(data);
+        // console.log(login)
+        // if(login?.response){
+        //     await setToken(login.response.token)
+        //     navigation.navigate('DashboardScreen');
+        // }else{
+        //     //Alert
+        //     Alert.alert(
+        //         'Error!',      
+        //         `Incorrect email or password, please try again`,  
+        //         [
+        //           {
+        //             text: 'OK',      
+        //             onPress: () => console.log('OK Pressed')  
+        //           },
+        //           // You can add more buttons here
+        //         ],
+        //         { cancelable: false }  
+        //       )
+        // }
     };
 
 
@@ -77,14 +77,11 @@ const LoginScreen = () => {
                 />
                
                 <View style={styles.title1}>
-                  <TouchableOpacity style={{ alignSelf: "flex-start" }} onPress={() => navigation.navigate("ForgotPasswordScreen")}>
-                    <Text style={styles.text3 }>Forget Password</Text>
-                  </TouchableOpacity>
                   <TouchableOpacity
                    onPress={() =>{
                     navigation.navigate('RegisterScreen')}}
                   >
-                    <Text style={styles.text2}>Register</Text>
+                    <Text style={styles.text2}>Register/SignUp</Text>
                   </TouchableOpacity>
                 </View>
                 <TouchableOpacity
@@ -179,7 +176,7 @@ const styles = StyleSheet.create({
       color:'blue',
       fontSize:17,
       fontWeight:'bold',
-      marginLeft:170,
+      marginLeft:240,
       textDecorationLine: 'underline'
       
     },
